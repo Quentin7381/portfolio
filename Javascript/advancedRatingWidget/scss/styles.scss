@@ -1,0 +1,266 @@
+*{
+    border : black 1px;
+    font-family: poppins;
+    font-size: 16px;
+    color: #191B4A;
+
+    box-sizing: border-box;
+}
+
+html{
+    background-color: rgb(68, 68, 68);
+}
+
+body{
+    background-color: #F8F8F8;
+    border-radius: 23px;
+    padding: 84px;
+
+    margin : 20px auto;
+    max-width: 700px;
+
+}
+
+.starIcon{
+    stroke : #EFB153;
+    fill: #FFD66C;
+
+}
+
+.searchIcon{
+    stroke: #73749C;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    font-size: 34px;
+    font-Style: MerriWeather;
+    width : 300px;
+
+    flex: 0 0 auto;
+    margin-right: 12px;
+}
+
+.avgRatingFrame{
+    width: 160px;
+    height: 130px;
+    padding: 8px;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0px 7px 20px 0px rgba(115, 116, 156, 0.08);
+
+    &__icon{
+        width: 46px;
+        height: 46px;
+    }
+
+    &__rating{
+        font-size: 26px;
+        font-weight: bold;
+        height : 46px;
+        padding-top: 10px;        
+    }
+
+    &__description{
+        font-size: 14;
+        width: 140px;
+        margin-top: 8px;
+        text-align: center;
+    }
+
+}
+
+.searchBar{
+
+    margin-top: 56px;
+    display: flex;
+
+    &__btn{
+        height: 60px;
+        width: 40px;
+        padding-left: 12px;
+
+        border-top-left-radius: 26px;
+        border-bottom-left-radius: 26px;
+        background-color: #FFFFFF;
+    }
+
+    & input{
+        height:60px;
+        width: 100%;
+        padding: 12px;
+
+        border-top-right-radius: 26px;
+        border-bottom-right-radius: 26px;
+        background-color: #FFFFFF;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+}
+
+.ratingFrame{
+
+    margin-top: 10px;
+
+    & h3{
+        font-weight: bold;
+    }
+
+}
+
+.ratingBar{
+
+    margin-top: 8px;
+
+    display: grid;
+    grid-template-columns: 20px 26px auto 40px;
+    grid-column-gap: 8px;
+
+    &__value{
+        font-weight: bold;
+        align-items: right;
+        text-align: right;
+    }
+
+    &__icon{
+
+    }
+
+    &__bar{
+        border-radius: 13px;
+        height: 10px;
+        background-color: #EEEEEE;
+        border: 1px solid #C9C9C9;
+
+        align-self: center;
+    }
+
+    &__fill{
+        box-sizing: content-box;
+        transform: translate(-1px, -1px);
+        background-color: #FFD66C;
+        border: 1px solid #EFB153;
+        border-radius: 13px;
+
+        width: 50%;
+        height: 100%;
+    }
+
+    &__number{
+        font-size: 14px;
+    }
+}
+
+.rateBtn{
+    margin-top: 32px;
+
+    width: 164px;
+    height: 56px;
+
+    border-radius: 24px;
+    background-color: #191B4A;
+    
+    color: #EEEEEE;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 15px;
+}
+
+@media (max-width: 640px){
+    
+    *{
+        font-size: 14px;
+    }
+
+    html{
+        height: 100%;
+    }
+    
+    body{
+        height: 100%;
+        border-radius: 0;
+        padding: 30px;
+    
+        margin : 0;
+    }
+    
+    .header{
+        flex-wrap: wrap;
+    }
+    
+    .title{
+        font-size: 24px;
+        width : 100%;
+        text-align: center;
+        margin: 0;
+    }
+    
+    .avgRatingFrame{
+        width: 100%;
+        height: 80px;
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    
+        &__icon{
+            width: 34px;
+            height: 34px;
+        }
+    
+        &__rating{
+            font-size: 26px;
+            height: auto;
+            font-weight: bold;
+            padding-top: 0;
+        }
+    
+        &__description{
+            margin-top: 0;
+            font-size: 14;
+            width: 100%;
+            text-align: center;
+        }
+    
+    }
+    
+    .searchBar{
+    
+        margin-top: 12px;
+        display: flex;
+    
+        &__btn{
+            height: 40px;
+        }
+    
+        & input{
+            height:40px;
+            width: 100%;
+        }
+    
+    }
+    
+    .rateBtn{
+        margin: 32px auto;
+    
+        width: 80%;
+        height: 40px;
+        
+        font-size: 14px;
+        padding-top: 8px;
+    }
+
+}

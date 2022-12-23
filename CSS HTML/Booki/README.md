@@ -1,0 +1,1 @@
+Ce projet m'a ete propose dans le cadre de la formation Prepapprentissage d'OpenClassrooms. Il s'agit de l'integration HTML CSS d'une maquette preconcue.

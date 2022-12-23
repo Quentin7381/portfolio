@@ -1,0 +1,464 @@
+/* ***** GENERAL ***** */
+:root {
+    /* Variables en root pour accessibilité */
+    --colorPrimary: #0065FC;
+    --colorLight: #DEEBFF;
+    --colorBackground: #F2F2F2;
+    --colorGrey: #D9D9D9;
+
+    --largeSpacing: 30px;
+}
+
+* {
+    border: none;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0 0 0.15rem 0;
+    list-style: none;
+    text-decoration: none;
+
+    font-family: Raleway;
+    font-size: 16px;
+
+    transition: all 0.3s;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+input {
+    outline: none;
+}
+
+body {
+    max-width: 1300px;
+    width: calc(100% - 100px);
+    /* Le contrôle de width permet la régulation de la margin */
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+/* ***** HEADER ***** */
+
+
+.header {
+    margin-bottom: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header components */
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__nav>a {
+    color: black;
+    padding: 20px 50px;
+    border-top: 2px solid white;
+}
+
+.header__nav>a:hover {
+    border-top: 2px solid var(--colorPrimary);
+    color: var(--colorPrimary);
+}
+
+.header__logo>img {
+    height: 19px;
+}
+
+.header__logo:hover {
+    cursor: pointer;
+}
+
+/* ***** SEARCH ****** */
+
+.search>form {
+    margin: 20px 0;
+}
+
+/* searchBar */
+.searchBar {
+    position: relative;
+    --heightSearchBar: 50px;
+
+    margin-bottom: 32px;
+    border-radius: 20px;
+    width: 500px;
+
+    height: var(--heightSearchBar);
+    display: flex;
+}
+
+.searchBar__icon {
+    background-color: var(--colorBackground);
+    padding: calc((var(--heightSearchBar) - 12px) / 2);
+    border-radius: 10px 0 0 10px;
+}
+
+.searchBar__input {
+    padding: 15px;
+    flex-grow: 1;
+    font-weight: bold;
+    border: 2px solid var(--colorBackground);
+    border-right: none;
+    border-left: none;
+}
+
+.searchBar__submit {
+    background-color: var(--colorPrimary);
+    color: white;
+    font-weight: bold;
+    justify-self: end;
+
+    padding: 15px;
+
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--colorPrimary);
+    outline: none;
+
+    cursor: pointer;
+}
+
+.searchBar__submitIcon {
+    /* Submit icon est caché tant que l'on est pas sur la version mobile */
+    display: block;
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 17px;
+
+    color: white;
+    background-color: var(--colorPrimary);
+    border: 2px solid var(--colorPrimary);
+    border-radius: 0 10px 10px 0;
+
+    z-index: -1;
+}
+
+.searchBar__submit:hover {
+    transform: scale(1.05);
+    /* Optionnel */
+}
+
+/* search filters Checkboxes */
+.search__filters {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    max-width: 850px;
+    flex-wrap: nowrap;
+    align-items: center;
+
+}
+
+.search__checkbox {
+    display: none;
+}
+
+.search__checkbox+label {
+    padding: 6px 20px 0 20px;
+    border: solid 2px var(--colorGrey);
+    border-radius: 25px;
+
+    padding: 0.75em;
+    font-size: clamp(11px, calc(2.7vw - 9.6px), 17px);
+    /* 11px atteins à 768px, 17px atteins à 992px */
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.search__checkbox+label:hover {
+    background-color: var(--colorLight);
+}
+
+.search__checkbox:checked+label {
+    background-color: var(--colorLight)
+        /* Optionnel */
+}
+
+.search__checkbox+label>span {
+    color: var(--colorPrimary);
+    font-size: clamp(11px, calc(2.7vw - 9.6px), 17px);
+    /* 11px atteins à 768px, 17px atteins à 992px */
+    margin-right: 0.5em;
+}
+
+/* ***** RESULTS ***** */
+
+.infotext {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+.fa-info {
+    width: 30px;
+    height: 30px;
+    padding: 5px 0 0 11.5px;
+    margin: 0 10px 0 0;
+    border-radius: 25px;
+    border: 1px solid var(--colorGrey);
+
+    color: var(--colorPrimary);
+    font-weight: bold;
+}
+
+.fa-info__text {
+    margin: auto 0;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--largeSpacing);
+}
+
+.results>div {
+    margin: 20px 0;
+    border-radius: 20px;
+    background-color: var(--colorBackground);
+}
+
+/* main */
+.results__main {
+    padding: var(--largeSpacing);
+}
+
+.results__main>h2 {
+    margin-bottom: var(--largeSpacing);
+}
+
+/* results cards */
+.results__cardsGroup {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(246px, 1fr));
+    /* change min for more responsive */
+    gap: 20px;
+}
+
+.results__card {
+    padding: 5px;
+    margin: auto;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 3px 15px var(--colorGrey);
+
+    height: 199px;
+    width: 100%;
+    max-width: 246px;
+
+    display: grid;
+    grid-template-rows: 114px 1fr;
+
+    cursor: pointer;
+    user-select: none;
+
+    position: relative;
+
+    align-items: center
+}
+
+.results__card:hover {
+    transform: scale(1.05);
+}
+
+.currency {
+    font-size: inherit;
+    font-weight: 550;
+}
+
+.results__card>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 20px 0 0;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.results__card>.description {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    padding: 5px 5px 5px 5px;
+}
+
+.results__card>.description>p {
+    font-size: 14px;
+}
+
+.results__card>.description>.ranking>i {
+    font-size: 12px;
+}
+
+.results__card>.description>.ranking {
+    align-self: flex-end;
+}
+
+.results__card>a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* results rankings */
+.ranking {
+    /* Interet */
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.ranking>.fa-star.active {
+    color: var(--colorPrimary);
+}
+
+.ranking>.fa-star.inactive {
+    color: var(--colorBackground);
+}
+
+/* expand */
+.results__expand {
+    margin-top: 35px;
+}
+
+.results__expand:hover {
+    color: var(--colorPrimary);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* top */
+.results__top {
+    position: relative;
+    padding: var(--largeSpacing);
+}
+
+.results__top>h2 {
+    margin-bottom: var(--largeSpacing);
+}
+
+.results__top>i {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: var(--colorPrimary);
+}
+
+.results__top>.results__cardsGroup {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(280px, 1fr));
+    /* change min for responsive */
+    gap: 20px;
+}
+
+.results__top>*>.results__card {
+    display: grid;
+    grid-template-columns: 1fr 211px;
+    /* 1fr make it so it is the image that shrinks if needed, it could be the other way arround or fully proportional */
+    grid-template-rows: 1fr;
+
+    height: 144px;
+    width: 100%;
+    max-width: 343px;
+}
+
+.results__top>*>.results__card>img {
+    height: 100%;
+    width: 100%;
+    float: left;
+    margin-right: 20px;
+    border-radius: 20px 0 0 20px;
+    grid-column: 1;
+}
+
+.results__top>*>.results__card>.description {
+    grid-column: 2;
+    height: 134px;
+    width: 100%;
+    padding: 16px 21px;
+}
+
+/* ***** LEISURES ***** */
+
+.leisures__list {
+    margin: 25px 0 60px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--largeSpacing);
+}
+
+.leisures__card {
+    display: grid;
+    grid-template-rows: auto 55px;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 3px 15px var(--colorGrey);
+    height: 445px;
+}
+
+.leisures__card>img {
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.leisures__card>h3 {
+    margin: auto 0;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.leisures__card>a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ***** FOOTER ***** */
+.footer {
+    background-color: var(--colorBackground);
+    padding: 40px 70px 50px 70px;
+    display: grid;
+    gap: 70px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.footer__row>ul>li {
+    margin-bottom: 15px;
+}
+
+.footer__row>h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
