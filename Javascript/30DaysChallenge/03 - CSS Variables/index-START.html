@@ -9,18 +9,45 @@
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="5" data-sizing="px">
 
     <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
 
     <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
+    <input id="base" type="color" name="base" value="#ffffff">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <div class="frame">
+    <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  </div>
 
   <style>
+
+    .frame{
+      --spacing : 5px;
+      --base : white;
+      border-color: var(--base);
+      border-style: solid;
+      border-width: var(--spacing);
+
+      width: 500px;
+      height: 500px;
+      margin: auto;
+
+      transition: border 0.5s;
+    }
+
+    img{
+      --blur : 0px;
+      filter: blur(var(--blur));
+
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+
+      transition: filter 0.5s;
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -44,7 +71,7 @@
     }
   </style>
 
-  <script>
+  <script src="firstTry.js">
   </script>
 
 </body>
