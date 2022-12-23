@@ -27,5 +27,5 @@ function applyTransforms(){
 refresh = setInterval(applyTransforms, 100 );
 
 /* A ameliorer :
-    La transition depuis la seconde 59 vers la seconde 0 fait revenir l'aiguille en arrière au lieu de continuer la rotation
+    La transition depuis la seconde 59 vers la seconde 0 fait revenir l'aiguille en arrière au lieu de continuer en avant
 */
