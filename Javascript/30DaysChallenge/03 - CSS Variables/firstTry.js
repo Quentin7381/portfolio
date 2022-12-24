@@ -19,3 +19,7 @@ baseInput.addEventListener('change', (e)=> {
     console.log(baseInput.value);
     frame.style.setProperty('--base', `${baseInput.value}`)
 });
+
+/* points d'amelioration
+    redondances de code (sur les event listener nottament)
+*/

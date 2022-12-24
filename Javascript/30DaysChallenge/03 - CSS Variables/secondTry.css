@@ -1,0 +1,23 @@
+:root{
+    --spacing: 0px;
+    --base: #ffffff;
+    --blur: 0px;
+}
+
+.frame{
+    border-color: var(--base);
+    border-style: solid;
+    border-width: var(--spacing);
+
+    width: 500px;
+    height: 500px;
+    margin: auto;
+}
+
+img{
+    filter: blur(var(--blur));
+
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
