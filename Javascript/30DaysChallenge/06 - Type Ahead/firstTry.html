@@ -19,6 +19,7 @@ const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb
 
 // Fetch the cities
 const cities = [];
+console.log(cities);
 
 fetch(endpoint)
   .then((response) => response.json())
@@ -72,7 +73,16 @@ function filterAll(array, obj, index = 0, keys = []){
   return filter(array, keys[index], obj[keys[index]]);
 }
 
-function refreshSuggestions(e){/* Refresh the suggrestion list at new entrie */
+function refreshSuggestions(array){
+  suggestions.innerHTML="";
+  array.forEach((item) => {
+    const newElt = document.createElement('li');
+    newElt.innerText = item.city;
+    suggestions.append(newElt);
+  })
+}
+
+function onSearchChange(e){/* Refresh the suggrestion list at new entrie */
   //transforms the string from the searchbar to a sum up of each letters
   const filter = Array.from(e.target.value).reduce((final, add) => {
     final[add] = !final[add] ? 1 : final[add]+1;
@@ -80,10 +90,11 @@ function refreshSuggestions(e){/* Refresh the suggrestion list at new entrie */
   }, {});
 
   const filteredCities = filterAll(cities, filter)
+  refreshSuggestions(filteredCities);
   console.log(filteredCities);
 }
 
-search.addEventListener("change", refreshSuggestions);
+search.addEventListener("input", onSearchChange);
 
 </script>
 </body>
