@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+// Fetch the cities
+const cities = [];
+console.log(cities);
+
+fetch(endpoint)
+  .then((response) => response.json())
+  .then((data) => cities.push(...data))
+
+// Select the elements
+
+const search = document.querySelector(".search");
+const suggestions = document.querySelector(".suggestions")
+
+//filter an array with an object of letter : number pairs. Only the values that haves at least the given number of letter will be kept
+// eg : with {a : 2, s : 1}, San Fransisco will be kept, but not San Diego
+function filterAll(array, filter){
+
+  let regSource = ".*";
+  filter.forEach((char) => {
+    regSource = regSource.concat(char, '.*');
+    console.log(regSource);
+  })
+  
+  const regex = new RegExp(regSource, 'i');
+
+  array = array.filter((item) => {
+    console.log(regex.exec(item.city));
+    if(regex.exec(item.city) !== null){
+      return 1;
+    } else if(regex.exec(item.state) !== null){
+      return 1;
+    } else return 0;
+  })
+
+  return array;
+}
+
+function refreshSuggestions(array){
+  suggestions.innerHTML="";
+  array.forEach((item) => {
+    const newElt = document.createElement('li');
+    newElt.innerText = `${item.city}, ${item.state}`;
+    suggestions.append(newElt);
+  })
+}
+
+function onSearchChange(e){/* Refresh the suggrestion list at new entrie */
+  //transforms the string from the searchbar to a sum up of each letters
+  const filter = Array.from(e.target.value);
+  const filteredCities = filterAll(cities, filter)
+  refreshSuggestions(filteredCities);
+  console.log(filteredCities);
+}
+
+search.addEventListener("input", onSearchChange);
+
+</script>
+</body>
+</html>
