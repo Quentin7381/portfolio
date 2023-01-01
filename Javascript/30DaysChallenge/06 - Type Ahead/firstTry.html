@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+// Fetch the cities
+const cities = [];
+
+fetch(endpoint)
+  .then((response) => response.json())
+  .then((data) => cities.push(...data))
+
+// Select the elements
+
+const search = document.querySelector(".search");
+const suggestions = document.querySelector(".suggestions")
+
+//return an array of all strings that had at least <number> of the specified <char> within
+// eg : with number=2 and char='a', San Fransisco will be kept, but not San Diego
+function filter(array, char, number){
+
+  const regex = new RegExp(char, 'gi')
+  
+  array = array.filter((str) => {
+      const match = str.city.match(regex);
+      if(match!==null){
+        if(match.length>=number){
+          return 1;
+        }
+      }
+      return 0;
+  })
+
+  console.log(array);
+
+  return array;
+}
+
+//filter an array with an object of letter : number pairs. Only the values that haves at least the given number of letter will be kept
+// eg : with {a : 2, s : 1}, San Fransisco will be kept, but not San Diego
+function filterAll(array, obj, index = 0, keys = []){
+
+  //if the array of key is emptry we fill it
+  if(keys.length == 0){
+    for (var key in obj){
+      keys.push(key);
+    }
+  }
+
+  
+  
+  //if there is another key after this one we call the function again
+  if((keys.length-1)>index){
+    array = filterAll(array, obj, index+1, keys)
+  }
+
+  //then we return the filtered value
+  return filter(array, keys[index], obj[keys[index]]);
+}
+
+function refreshSuggestions(e){/* Refresh the suggrestion list at new entrie */
+  //transforms the string from the searchbar to a sum up of each letters
+  const filter = Array.from(e.target.value).reduce((final, add) => {
+    final[add] = !final[add] ? 1 : final[add]+1;
+    return final;
+  }, {});
+
+  const filteredCities = filterAll(cities, filter)
+  console.log(filteredCities);
+}
+
+search.addEventListener("change", refreshSuggestions);
+
+</script>
+</body>
+</html>
