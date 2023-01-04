@@ -6,12 +6,105 @@
 </head>
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
+
 <script>
+  class Canvas{
+
+    constructor(board, color="#000", lineWidth=20){
+      try{
+        if(!(board instanceof Element)) throw TypeError(`Expected : Element, got : type = ${typeof board}, value = ${board} prototype = ${Object.getPrototypeOf(board)}`)
+        if(board.tagName!=="CANVAS") throw TypeError(`Expected tagName : CANVAS, got : ${board.tagName}`)
+      }catch(e){
+        console.error(e);
+        return;
+      }
+
+      this.board = board;
+      this.ctx = board.getContext("2d");
+      this.ctx.width = window.innerWidth;
+      this.ctx.height = window.innerHeight;
+      this.ctx.lineJoin = 'round';
+      this.ctx.lineCap = 'round';
+      
+      this.setLineWidth(lineWidth);
+      this.setColor(color);
+
+      this.isDrawing = false;
+      this.lastX = 0;
+      this.lastY = 0;
+
+      board.addEventListener('mousedown', (e) => {
+        console.log(e.offsetX, e.offsetY);
+        this.isDrawing = true;
+        this.lastX = e.offsetX;
+        this.lastY = e.offsetY;
+      });
+
+      this.board.addEventListener('mousemove', (e) => this.draw(this.ctx, e.offsetX, e.offsetY));
+      this.board.addEventListener('mouseup', () => this.isDrawing = false);
+      this.board.addEventListener('mouseout', () => this.isDrawing = false);
+    }
+
+    setColor(color){//uses an hexadecimal in a String to set the stroke color
+      const tagCheck = new RegExp(/#/);
+      const colorCheck = new RegExp(/^#[0-9]{3}$|^#[0-9]{6}$/);
+
+      try {
+        if(typeof color !== "string") throw new TypeError(`Expected : String, got ${typeof color}`);
+        if(tagCheck.exec(color)===null){
+          color = String.prototype.concat('#', color);
+        }
+        if(colorCheck.exec(color)===null){
+          throw new SyntaxError(`Expected format : '#123' OR '#123456', got '${color}'`)
+        }
+      } catch (e) {
+        console.error(e);
+        this.ctx.strokeStyle = "#000";
+        return this.ctx.strokeStyle;
+      }
+
+      this.ctx.strokeStyle = color;
+
+      return this.ctx.strokeStyle;
+    }
+
+    setLineWidth(width){//uses a number to set the width of the stroke
+      try{
+        if(typeof width != "number") throw new TypeError("La width donnee n'est pas un nombre");
+        if(width<=0) throw new RangeError("La width donnee est inferieure ou egale a 0");
+      } catch (e) {
+        console.error(e);
+        this.ctx.lineWidth = 20;
+        return this.ctx.lineWidth;
+      }
+
+      this.ctx.lineWidth = width;
+      return this.ctx.lineWidth;
+    }
+
+    draw(ctx, offsetX, offsetY){
+      console.log(`is drawing : ${this.isDrawing}, last X : ${this.lastX} Y : ${this.lastY}, offset X : ${offsetX} Y : ${offsetY}`);
+      if(!this.isDrawing) return;
+
+      ctx.beginPath();
+      ctx.moveTo(this.lastX, this.lastY);
+      ctx.lineTo(offsetX, offsetY);
+      ctx.stroke();
+      this.lastX = offsetX;
+      this.lastY = offsetY;
+    }
+  }
+  
+  const canvas = new Canvas(document.querySelector('#draw'));
 </script>
 
 <style>
   html, body {
     margin: 0;
+  }
+
+  canvas{
+    background-color: aqua;
   }
 </style>
 
