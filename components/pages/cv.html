@@ -8,7 +8,12 @@
     <script src="/includeHtml.js" defer></script>
 </head>
 <body>
-    <header include-html="/components/header.html"></header>
+    <header>
+        <a href="/index.html">A propos de moi</a>
+        <a href="/components/pages/projets.html">Projets</a>
+        <a class="active" href="/components/pages/cv.html">CV</a>
+        <a href="/components/pages/contact.html">Contact</a>
+    </header>
     <div class="info" include-html="/components/info.html"></div>
     
 </body>

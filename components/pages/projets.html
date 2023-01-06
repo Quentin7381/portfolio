@@ -5,21 +5,25 @@
     <meta charset="UTF-8">
     <title>Portfolio - Accueuil</title>
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/components/styles/projets.css">
     <script src="/includeHtml.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header include-html="/components/header.html"></header>
-    
-    <h1>Mes projets</h1>
+    <header>
+        <a href="/index.html">A propos de moi</a>
+        <a class="active" href="/components/pages/projets.html">Projets</a>
+        <a href="/components/pages/cv.html">CV</a>
+        <a href="/components/pages/contact.html">Contact</a>
+    </header>
+
+
     <main class="projets">
-        
+        <div class="projets__liste"></div>
     </main>
 
-    <script>
+    <script> //Ajoute les differents projets a partir de leurs données
         //fonctions
-        const main = document.querySelector("main");
+        const main = document.querySelector(".projets__liste");
         const projets = [];
 
         function ajouterProjet(imgSrc, imgAlt, titre, description, technos = [], lien){
@@ -39,11 +43,11 @@
             projets.forEach((proj) => {
                 //creation de l'article
                 const article = document.createElement('article')
-                console.log(article);
+                article.classList.add('projetsArticle');
                 article.innerHTML = (
                     `<a href="${proj.lien}"></a>
-                    <img src="${proj.imgSrc}" alt="${proj.imgAlt}">
                     <h2>${proj.titre}</h2>
+                    <img src="${proj.imgSrc}" alt="${proj.imgAlt}"> 
                     <p>${proj.description}</p>`
                 );
                 main.appendChild(article);
@@ -51,7 +55,7 @@
                 //ajout des technologies utilisees
                 const techList = document.createElement("ul");
                 article.appendChild(techList);
-                techList.innerText = "Technos : "
+                techList.innerText = ""
                 proj.technos.forEach((tech) => {
                     const newTech = document.createElement("li");
                     newTech.innerText = tech;
@@ -62,7 +66,7 @@
 
         //ajout des projets
         ajouterProjet(
-            "/components/img/bookiCouverture.jpg", "capture d'ecran du projet Booki",
+            "/components/img/bookiCouverture.jpg", "capture d'écran du projet Booki",
             "Booki",
             "Restranscription d'une maquette en un site responsive",
             [
@@ -72,15 +76,18 @@
             "/projects/CSS_HTML/Booki"
         );
         ajouterProjet(
-            "/components/img/bookiCouverture.jpg", "capture d'ecran du projet Booki",
-            "Booki",
-            "Restranscription d'une maquette en un site statique responsive",
+            "/components/img/ratingWidget.png", "capture d'écran du projet Rating Widget",
+            "Rating Widget",
+            "Widget de notation avec notes et moyenne generées aléatoirement",
             [
                 "HTML",
-                "CSS"
+                "CSS",
+                "Javascript"
             ],
-            "/projects/CSS_HTML/Booki"
+            "/projects/Javascript/advancedRatingWidget"
         );
+
+
         afficherProjets();
         
     </script>

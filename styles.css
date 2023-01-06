@@ -1,14 +1,20 @@
+/* ***** ***** INDEX ***** ***** */
+
 :root{
     --colorAccent : #312b20;
     --colorAccentLight : #988663;
-    --colorLight : #edeae3;
+    --colorLight : #f6f5f2;
     --colorDark : #484b55;
+}
+
+*{
+    box-sizing: border-box;
+    transition: transform 0.3s;
 }
 
 body, html{
     font-family: Quicksand;
     margin: 0;
-    box-sizing: border-box;
 }
 
 body{
@@ -22,14 +28,16 @@ body>*:not(:first-child){
 h1{
     color: var(--colorAccent);
     font-weight: bold;
-    border-bottom: #312b20 2px solid;
-    margin-right :20%;
+    border-bottom: var(--colorAccent) 2px solid;
+    margin: 15px 20% 15px 0;
     padding-bottom: 15px;
 }
 
 header{
     background-color: var(--colorAccent);
     display: flex;
+    font-weight: bold;
+    margin-bottom: 25px;
 }
 
     header>a{
@@ -44,6 +52,14 @@ header{
         header>a:hover{
             background-color: var(--colorLight);
             color: var(--colorAccent);
+            text-decoration: underline;
+            transform: scale(1.15);
+        }
+
+        header>a.active{
+            background-color: var(--colorLight);
+            color: var(--colorAccent);
+            text-decoration: underline;
         }
 
 .info{
@@ -54,3 +70,57 @@ header{
     color:darkred;
     text-align: center;
 }
+
+/* ***** ***** PROJETS ***** ***** */
+.projets__liste{
+    display : grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 5vw;
+}
+
+.projetsArticle{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: auto;
+    box-shadow: 5px 4px 15px -2px var(--colorDark);
+    position: relative;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+    .projetsArticle:hover{
+        transform: scale(1.01);
+    }
+
+    .projetsArticle>img{
+        margin: 0 -15px;
+        width: calc(100% + 30px);
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .projetsArticle>a{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .projetsArticle>h2{
+        background-color: var(--colorAccent);
+        color: var(--colorLight);
+        margin: -15px -15px 0 -15px;
+        padding: 15px;
+    }
+
+    .projetsArticle>p,ul{
+        padding: 0 20px;
+    }
+
+        .projetsArticle>ul>li{
+            padding: 0 40px;
+            list-style: none;
+        }
