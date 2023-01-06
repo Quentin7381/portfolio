@@ -92,10 +92,49 @@
     <div class="item">
       <input type="checkbox">
       <p>Don't forget to tweet your result!</p>
-    </div>
+    </div>  
   </div>
 
 <script>
+  const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+  let shiftDown = false;
+  let lastCheckIndex = null;
+
+  function onKeyDown(e){
+    if(e.key != "Shift") return;
+    shiftDown = true;
+  }
+
+  function onKeyUp(e){
+    if(e.key != "Shift") return;
+    shiftDown = false;
+  }
+
+  function onCheckboxChange(e){
+    if(!shiftDown) return;
+    if(lastCheckIndex == null){
+      lastCheckIndex = e.target.dataset.index;
+      console.log(`null -> ${lastCheckIndex}`)
+    } else {
+      const increase = lastCheckIndex<e.target.dataset.index;
+      for(
+          let a = increase ? lastCheckIndex : e.target.dataset.index;
+          a <= (increase ? e.target.dataset.index : lastCheckIndex);
+          a++
+          ){
+        checkboxes[a].checked=checkboxes[lastCheckIndex].checked;
+      }
+      lastCheckIndex = null;
+    }
+  }
+
+  document.addEventListener("keydown", onKeyDown);
+  document.addEventListener("keyup", onKeyUp);
+
+  checkboxes.forEach((element, index) => {
+    element.addEventListener("change", onCheckboxChange)
+    element.dataset.index = index;
+  });
 </script>
 </body>
 </html>

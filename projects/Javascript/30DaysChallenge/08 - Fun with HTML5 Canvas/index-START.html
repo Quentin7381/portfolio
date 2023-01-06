@@ -5,11 +5,14 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
+<header class="toolbar">
+  <input type="color" id="strokeColorInp" value="#000000">
+  <input type="range" min="5" max="100" step="5" value="5" id="strokeWidthInp">
+</header>
 <canvas id="draw" width="800" height="800"></canvas>
 
 <script>
   class Canvas{
-
     constructor(board, color="#000", lineWidth=20){
       try{
         if(!(board instanceof Element)) throw TypeError(`Expected : Element, got : type = ${typeof board}, value = ${board} prototype = ${Object.getPrototypeOf(board)}`)
@@ -21,20 +24,17 @@
 
       this.board = board;
       this.ctx = board.getContext("2d");
-      this.ctx.width = window.innerWidth;
-      this.ctx.height = window.innerHeight;
       this.ctx.lineJoin = 'round';
       this.ctx.lineCap = 'round';
       
-      this.setLineWidth(lineWidth);
-      this.setColor(color);
+      this.setStrokeWidth(lineWidth);
+      this.setStrokeColor(color);
 
       this.isDrawing = false;
       this.lastX = 0;
       this.lastY = 0;
 
       board.addEventListener('mousedown', (e) => {
-        console.log(e.offsetX, e.offsetY);
         this.isDrawing = true;
         this.lastX = e.offsetX;
         this.lastY = e.offsetY;
@@ -42,12 +42,12 @@
 
       this.board.addEventListener('mousemove', (e) => this.draw(this.ctx, e.offsetX, e.offsetY));
       this.board.addEventListener('mouseup', () => this.isDrawing = false);
-      this.board.addEventListener('mouseout', () => this.isDrawing = false);
+      
     }
 
-    setColor(color){//uses an hexadecimal in a String to set the stroke color
+    setStrokeColor(color){//uses an hexadecimal in a String to set the stroke color
       const tagCheck = new RegExp(/#/);
-      const colorCheck = new RegExp(/^#[0-9]{3}$|^#[0-9]{6}$/);
+      const colorCheck = new RegExp(/^#[0-9|a-f]{3}$|^#[0-9|a-f]{6}$/);
 
       try {
         if(typeof color !== "string") throw new TypeError(`Expected : String, got ${typeof color}`);
@@ -68,9 +68,10 @@
       return this.ctx.strokeStyle;
     }
 
-    setLineWidth(width){//uses a number to set the width of the stroke
+    setStrokeWidth(width){//uses a number to set the width of the stroke
       try{
-        if(typeof width != "number") throw new TypeError("La width donnee n'est pas un nombre");
+        if(typeof width=="string") width = parseInt(width, 10);
+        if(typeof width != "number") throw new TypeError(`Expected : number or String, got : ${typeof width}`);
         if(width<=0) throw new RangeError("La width donnee est inferieure ou egale a 0");
       } catch (e) {
         console.error(e);
@@ -83,7 +84,6 @@
     }
 
     draw(ctx, offsetX, offsetY){
-      console.log(`is drawing : ${this.isDrawing}, last X : ${this.lastX} Y : ${this.lastY}, offset X : ${offsetX} Y : ${offsetY}`);
       if(!this.isDrawing) return;
 
       ctx.beginPath();
@@ -95,7 +95,13 @@
     }
   }
   
+  //Script
   const canvas = new Canvas(document.querySelector('#draw'));
+  const strokeColorInp = document.querySelector('#strokeColorInp');
+  const strokeWidthInp = document.querySelector('#strokeWidthInp');
+  
+  strokeColorInp.addEventListener("change", (e) => canvas.setStrokeColor(e.target.value));
+  strokeWidthInp.addEventListener("change", (e) => canvas.setStrokeWidth(e.target.value) )
 </script>
 
 <style>
@@ -104,7 +110,7 @@
   }
 
   canvas{
-    background-color: aqua;
+    border : solid 2px black;
   }
 </style>
 
