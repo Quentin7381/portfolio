@@ -1,3 +1,10 @@
+:root{
+    --colorAccent : #312b20;
+    --colorAccentLight : #988663;
+    --colorLight : #edeae3;
+    --colorDark : #484b55;
+}
+
 main{
     display : grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -6,7 +13,7 @@ main{
 article{
     width : 70%;
     margin: auto;
-    box-shadow: 10px 10px 10px black;
+    box-shadow: 5px 4px 15px -2px var(--colorDark);
     position: relative;
 }
 

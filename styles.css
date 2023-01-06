@@ -1,13 +1,50 @@
-.body, html{
+:root{
+    --colorAccent : #312b20;
+    --colorAccentLight : #988663;
+    --colorLight : #edeae3;
+    --colorDark : #484b55;
+}
+
+body, html{
+    font-family: Quicksand;
     margin: 0;
     box-sizing: border-box;
 }
 
 body{
-    display: grid;
-    grid-template-rows: repeat(auto-fit, auto);
-    gap: 5vw;
+    background-color: var(--colorLight);
 }
+
+body>*:not(:first-child){
+    margin: 0 2vw;
+}
+
+h1{
+    color: var(--colorAccent);
+    font-weight: bold;
+    border-bottom: #312b20 2px solid;
+    margin-right :20%;
+    padding-bottom: 15px;
+}
+
+header{
+    background-color: var(--colorAccent);
+    display: flex;
+}
+
+    header>a{
+        padding: 25px;
+        color: var(--colorLight);
+        text-decoration: none;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+        header>a:hover{
+            background-color: var(--colorLight);
+            color: var(--colorAccent);
+        }
 
 .info{
     border: 2px red solid;
