@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - Accueuil</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/components/styles/projets.css">
+    <script src="/includeHtml.js" defer></script>
+</head>
+<body>
+    <header include-html="/components/header.html"></header>
+    
+    <h1>Mes projets</h1>
+    <main class="projets">
+        
+    </main>
+
+    <script>
+        //fonctions
+        const main = document.querySelector("main");
+        const projets = [];
+
+        function ajouterProjet(imgSrc, imgAlt, titre, description, technos = [], lien){
+            projets.push({
+                imgSrc : imgSrc,
+                imgAlt : imgAlt,
+                titre : titre,
+                description : description,
+                technos : technos,
+                lien : lien
+            })
+        }
+
+        function afficherProjets(){
+            
+            //
+            projets.forEach((proj) => {
+                //creation de l'article
+                const article = document.createElement('article')
+                console.log(article);
+                article.innerHTML = (
+                    `<a href="${proj.lien}"></a>
+                    <img src="${proj.imgSrc}" alt="${proj.imgAlt}">
+                    <h2>${proj.titre}</h2>
+                    <p>${proj.description}</p>`
+                );
+                main.appendChild(article);
+
+                //ajout des technologies utilisees
+                const techList = document.createElement("ul");
+                article.appendChild(techList);
+                techList.innerText = "Technos : "
+                proj.technos.forEach((tech) => {
+                    const newTech = document.createElement("li");
+                    newTech.innerText = tech;
+                    techList.appendChild(newTech);
+                })
+            })
+        }
+
+        //ajout des projets
+        ajouterProjet(
+            "/components/img/bookiCouverture.jpg", "capture d'ecran du projet Booki",
+            "Booki",
+            "Restranscription d'une maquette en un site responsive",
+            [
+                "HTML",
+                "CSS"
+            ],
+            "/projects/CSS_HTML/Booki"
+        );
+        ajouterProjet(
+            "/components/img/bookiCouverture.jpg", "capture d'ecran du projet Booki",
+            "Booki",
+            "Restranscription d'une maquette en un site statique responsive",
+            [
+                "HTML",
+                "CSS"
+            ],
+            "/projects/CSS_HTML/Booki"
+        );
+        afficherProjets();
+        
+    </script>
+</body>
+
+
+</html>

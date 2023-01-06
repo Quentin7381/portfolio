@@ -1,4 +1,13 @@
+.body, html{
+    margin: 0;
+    box-sizing: border-box;
+}
 
+body{
+    display: grid;
+    grid-template-rows: repeat(auto-fit, auto);
+    gap: 5vw;
+}
 
 .info{
     border: 2px red solid;
@@ -8,4 +17,3 @@
     color:darkred;
     text-align: center;
 }
-
