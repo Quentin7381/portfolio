@@ -75,13 +75,14 @@ header{
 .projets__liste{
     display : grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 5vw;
+    gap: 2vw;
 }
 
 .projetsArticle{
     width: 100%;
     height: 100%;
-    max-width: 100%;
+    
+    max-width: 550px;
     padding: 15px;
     margin: auto;
     box-shadow: 5px 4px 15px -2px var(--colorDark);
@@ -99,6 +100,7 @@ header{
         width: calc(100% + 30px);
         height: 300px;
         object-fit: cover;
+        border-bottom: 2px solid var(--colorAccent);
     }
 
     .projetsArticle>a{
