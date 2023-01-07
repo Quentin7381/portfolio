@@ -1,10 +1,11 @@
 /* ***** ***** INDEX ***** ***** */
 
 :root{
-    --colorAccent : #312b20;
-    --colorAccentLight : #988663;
-    --colorLight : #f6f5f2;
-    --colorDark : #484b55;
+    --colorAccent : #e66100;
+    --colorLight : #F8F8FF;
+    --colorDark : #3a3c45;
+    --spacingSmall : 2vw;
+    --spacingMedium : 5vw;
 }
 
 *{
@@ -22,22 +23,44 @@ body{
 }
 
 body>*:not(:first-child){
-    margin: 0 2vw;
+    margin: 0 auto;
+    width: calc(100% - var(--spacingSmall));
+    max-width: 1300px;
 }
 
+/* Text */
+
 h1{
-    color: var(--colorAccent);
+    left: 0; right: 0;
+    color: var(--colorLight);
+    background-color: var(--colorAccent);
+    border: 2px solid var(--colorDark);
+    padding: 10px;
     font-weight: bold;
-    border-bottom: var(--colorAccent) 2px solid;
-    margin: 15px 20% 15px 0;
+    margin-top: var(--spacingMedium);
     padding-bottom: 15px;
 }
 
+p{
+    font-family: "Open Sans";
+    padding: 0 var(--spacingSmall);
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    color: #e66100;
+}
+
+/* Components */
+
 header{
-    background-color: var(--colorAccent);
+    background-color: var(--colorDark);
     display: flex;
     font-weight: bold;
-    margin-bottom: 25px;
+    margin-bottom: var(--spacingMedium);
 }
 
     header>a{
@@ -50,15 +73,14 @@ header{
     }
 
         header>a:hover{
-            background-color: var(--colorLight);
             color: var(--colorAccent);
             text-decoration: underline;
             transform: scale(1.15);
         }
 
         header>a.active{
-            background-color: var(--colorLight);
-            color: var(--colorAccent);
+            background-color: var(--colorAccent);
+            color: var(--colorLight);
             text-decoration: underline;
         }
 
@@ -71,11 +93,42 @@ header{
     text-align: center;
 }
 
+/* ***** ***** INDEX ***** *****/
+.tech{
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+}
+
+    .tech__name{
+        padding: 0 var(--spacingSmall) 0 0;
+        text-align: right;
+    }
+
+    .tech__rank{
+        padding: 0 0 0 var(--spacingSmall);
+        text-align: left;
+    }
+
+    .tech__progressBar{
+        width: 100%;
+        height: 14px;
+        margin: auto;
+        background-color: var(--colorDark);
+        padding: 2px;
+        border-radius: 7px;
+    }
+
+        .tech__progress{
+            background-color: var(--colorAccent);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
 /* ***** ***** PROJETS ***** ***** */
 .projets__liste{
     display : grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2vw;
+    gap: var(--spacingSmall);
 }
 
 .projetsArticle{
@@ -126,3 +179,5 @@ header{
             padding: 0 40px;
             list-style: none;
         }
+
+/* ***** ***** CONTACT ***** ***** */

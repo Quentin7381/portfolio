@@ -272,7 +272,7 @@ a:visited {
 
     height: 199px;
     width: 100%;
-    max-width: 246px;
+    max-width: 350px;
 
     display: grid;
     grid-template-rows: 114px 1fr;

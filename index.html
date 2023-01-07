@@ -6,6 +6,9 @@
     <title>Portfolio - Accueuil</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="/includeHtml.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@400&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <header>
@@ -14,8 +17,56 @@
         <a href="/components/pages/cv.html">CV</a>
         <a href="/components/pages/contact.html">Contact</a>
     </header>
-    <div class="info" include-html="/components/info.html"></div>
 
+    <main class="indexMain">
+        <p>Bonjour et bienvenue sur mon site. Il fait partie intégrante de mon portefolio. Ses contenus génériques sont générés à partir de Javascript. Vous pouvez retrouver son code sur : <a href="https://github.com/Quentin7381/portfolio">https://github.com/Quentin7381/portfolio</a>. Bonne visite !</p>
+        <h1>Mes technos</h1>
+
+        <ul class="indexMain__techList">
+        </ul>
+
+        <script>
+            //Ajout des technologies
+            const techlist = document.querySelector(".indexMain__techList");
+            const techArray = [];
+
+            function techPush(...arg){
+                for(a=0; a<arg.length; a=a+3){
+                    techArray.push({
+                        name : arg[a],
+                        progress : arg[a+1],
+                        rank : arg[a+2]
+                    })
+                }
+            }
+
+            techPush(
+                "HTML", "50%", "Junior",
+                "CSS", "50%", "Junior",
+                "JavaScript", "40%", "Junior",
+                "Git", "30%", "Junior",
+                "SQL", "20%", "Junior",
+                "React.js", "5%", "A venir",
+                "Node.js", "1%", "A venir",
+                "Express.js", "1%", "A venir",
+                "Mongo.db", "1%", "A venir"
+            )
+
+            techArray.forEach((tech) => {
+                const elt = document.createElement("li");
+                elt.classList.add("tech");
+                elt.innerHTML = (
+                    `<p class="tech__name">${tech.name}</p>
+                    <div class="tech__progressBar"><div class="tech__progress"></div></div>
+                    <p class="tech__rank">${tech.rank}</p>`
+                )
+                const progress = elt.querySelector(".tech__progress");
+                console.log(progress);
+                progress.setAttribute("style", `width : ${tech.progress}`)
+                techlist.append(elt);
+            })
+        </script>
+    </main>
 </body>
 
 
