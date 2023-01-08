@@ -1,0 +1,42 @@
+:root{
+    --size: 200px;
+    --diff: 10px;
+}
+
+.progressCircle__progress{
+    position: absolute;
+    width: calc(var(--size) - var(--diff));
+    height: calc(var(--size) - var(--diff));
+    left: calc(var(--diff)/2); top: calc(var(--diff)/2);
+    background-color: red;
+    border-radius: 100px;
+    transition: clip-path 0.99s linear;
+    margin: auto;
+    display: flex;
+}
+
+.progressCircle__outer{
+    position: relative;
+    display: flex;
+    width: var(--size);
+    height: var(--size);
+    background-color: black;
+    border-radius: 100px;
+}
+
+.progressCircle__inner{
+    position: absolute;
+    display: flex;
+    width: calc(var(--size) - var(--diff) * 2);
+    height: calc(var(--size) - var(--diff) * 2);
+    left: var(--diff); top: var(--diff);
+    background-color: blue;
+    border-radius: 100px;
+    margin: auto;
+    display: flex;
+}
+
+.progressCircle__text{
+    color : white;
+    margin: auto;
+}
