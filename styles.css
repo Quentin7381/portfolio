@@ -59,7 +59,6 @@ a{
 header{
     background-color: var(--colorDark);
     display: flex;
-    font-weight: bold;
     margin-bottom: var(--spacingMedium);
     height: 80px;
 }
@@ -72,7 +71,6 @@ header{
         display: flex;
         align-items: center;
         padding: auto;
-        font-weight: bold;
         font-size: 20px;
     }
 
