@@ -10,7 +10,7 @@
 
 *{
     box-sizing: border-box;
-    transition: transform 0.3s;
+    transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
 }
 
 body, html{
@@ -159,10 +159,12 @@ header{
     position: relative;
     font-weight: bold;
     overflow: hidden;
+    border: solid 1px var(--colorDark)
 }
 
     .projetsArticle:hover{
         transform: scale(1.01);
+        box-shadow: 9px 8px 19px -4px var(--colorDark);
     }
 
     .projetsArticle>img{
@@ -170,7 +172,7 @@ header{
         width: calc(100% + 30px);
         height: 300px;
         object-fit: cover;
-        border-bottom: 2px solid var(--colorAccent);
+        border-bottom: 2px solid var(--colorDark);
     }
 
     .projetsArticle>a{
