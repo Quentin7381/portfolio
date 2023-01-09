@@ -198,3 +198,13 @@ header{
         }
 
 /* ***** ***** CONTACT ***** ***** */
+
+/* ***** ***** CV ***** ***** */
+.cvContainer{
+    display: flex;
+}
+
+    .cv{
+        max-width: 750px;
+        margin: auto;
+    }
