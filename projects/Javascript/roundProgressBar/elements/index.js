@@ -1,13 +1,14 @@
-import {Element} from './element.js'
+import {Ellipse} from './circle.js'
 
 const target = document.querySelector('.target');
-const newElt = new Element(
+const newElt = new Ellipse(
     target,
     {
         width : '100px',
         height : '100px',
-        backgroundColor : 'red'
-    }, [
+        'background-color' : 'red'
+    }
+    , [
         'test'
     ]);
 

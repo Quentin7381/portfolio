@@ -3,6 +3,10 @@
     --diff: 10px;
 }
 
+.target{
+    border-radius: 9999px;
+}
+
 .progressCircle__progress{
     position: absolute;
     width: calc(var(--size) - var(--diff));
