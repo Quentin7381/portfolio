@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Portfolio - Accueuil</title>
     <link rel="stylesheet" href="/styles.css">
-    <script src="/includeHtml.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@400&display=swap" rel="stylesheet"> 
@@ -24,16 +23,17 @@
         <p><em>Note : Work In Progress, ce site est amené à évoluer rapidement.</em></p>
         <h1>Mes technos</h1>
 
-        <ul class="indexMain__techList">
-        </ul>
+        <div class="indexMain__techList"></div>
 
-        <script>
+        <script type="module">
+            import {CircleProgress} from '/scripts/index.js'
+
             //Ajout des technologies
             const techlist = document.querySelector(".indexMain__techList");
             const techArray = [];
 
             function techPush(...arg){
-                for(a=0; a<arg.length; a=a+3){
+                for(let a=0; a<arg.length; a=a+3){
                     techArray.push({
                         name : arg[a],
                         progress : arg[a+1],
@@ -43,29 +43,19 @@
             }
 
             techPush(
-                "HTML", "50%", "Junior",
-                "CSS", "50%", "Junior",
-                "JavaScript", "40%", "Junior",
-                "Git", "30%", "Junior",
-                "SQL", "20%", "Junior",
-                "React.js", "5%", "A venir",
-                "Node.js", "1%", "A venir",
-                "Express.js", "1%", "A venir",
-                "Mongo.db", "1%", "A venir"
+                "HTML", 60, "Junior",
+                "CSS", 60, "Junior",
+                "JavaScript", 50, "Junior",
+                "Git", 30, "Junior",
+                "SQL", 20, "Junior",
+                "React.js", 5, "A venir",
+                "Node.js", 1, "A venir",
+                "Express.js", 1, "A venir",
+                "Mongo.db", 1, "A venir"
             )
 
             techArray.forEach((tech) => {
-                const elt = document.createElement("li");
-                elt.classList.add("tech");
-                elt.innerHTML = (
-                    `<p class="tech__name">${tech.name}</p>
-                    <div class="tech__progressBar"><div class="tech__progress"></div></div>
-                    <p class="tech__rank">${tech.rank}</p>`
-                )
-                const progress = elt.querySelector(".tech__progress");
-                console.log(progress);
-                progress.setAttribute("style", `width : ${tech.progress}`)
-                techlist.append(elt);
+                new CircleProgress(tech.progress, tech.name, techlist);
             })
         </script>
     </main>

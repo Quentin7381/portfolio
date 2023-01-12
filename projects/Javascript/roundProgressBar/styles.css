@@ -3,10 +3,6 @@
     --diff: 10px;
 }
 
-.target{
-    
-}
-
 .progressCircle__progress{
     position: absolute;
     width: calc(var(--size) - var(--diff));
