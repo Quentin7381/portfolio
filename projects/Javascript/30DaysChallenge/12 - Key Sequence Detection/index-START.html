@@ -3,10 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Key Detection</title>
+  <style>
+    div{
+      width : 100px;
+      height : 100px;
+    }
+  </style>
   <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+  <div></div>
 <script>
+  const keysLog = [];
+  const keyLogMaxLength = 10;
+  const password = /azerty/;
+  const elt = document.querySelector('div')
+  
+  function captureKey(e){
+    keysLog.push(e.key);
+    if(keysLog.length>keyLogMaxLength){
+      keysLog.shift();
+    }
+    console.log(keysLog);
+    checkKeys();
+  }
+
+  function checkKeys(){
+    if(password.test(keysLog.join(''))){
+      elt.style.backgroundColor='green';
+      console.log('true');
+    } else {
+      elt.style.backgroundColor='red';
+      console.log('false');
+    }
+  }
+
+  document.addEventListener('keydown', captureKey)
 </script>
 </body>
 </html>
