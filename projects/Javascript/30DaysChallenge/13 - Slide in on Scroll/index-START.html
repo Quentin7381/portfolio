@@ -56,7 +56,25 @@
         timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
       };
+    };
+
+    const imgs = document.querySelectorAll('img');
+    imgs.forEach((img) => {
+      console.log(img);
+    });
+
+    function onScroll(e){
+      const screenBottom = self.pageYOffset + window.innerHeight;
+      imgs.forEach((img) => {
+        const imgMid = img.offsetTop + (img.offsetHeight / 2);
+        if(screenBottom > imgMid){
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
     }
+    window.addEventListener('scroll', onScroll);
 
   </script>
 
