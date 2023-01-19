@@ -27,14 +27,15 @@
         const main = document.querySelector(".projets__liste");
         const projets = [];
 
-        function ajouterProjet(imgSrc, imgAlt, titre, description, technos = [], lien){
+        function ajouterProjet(imgSrc, imgAlt, titre, description, technos = [], lienProjet, lienCode){
             projets.push({
                 imgSrc : imgSrc,
                 imgAlt : imgAlt,
                 titre : titre,
                 description : description,
                 technos : technos,
-                lien : lien
+                lienProjet : lienProjet,
+                lienCode : lienCode
             })
         }
 
@@ -46,46 +47,37 @@
                 const article = document.createElement('article')
                 article.classList.add('projetsArticle');
                 article.innerHTML = (
-                    `<a href="${proj.lien}"></a>
-                    <h2>${proj.titre}</h2>
+                    `<h2>${proj.titre}</h2>
                     <img src="${proj.imgSrc}" alt="${proj.imgAlt}"> 
-                    <p>${proj.description}</p>`
+                    <p>${proj.description}</p>
+                    <ul class="techList"></ul>
+                    <div class="lien lienProjet"><a href="${proj.lienProjet}">Afficher le projet</a></div>
+                    <div class="lien lienCode"><a href="${proj.lienCode}">Ouvrir le code</a></div>
+                    `
                 );
                 main.appendChild(article);
 
                 //ajout des technologies utilisees
-                const techList = document.createElement("ul");
-                article.appendChild(techList);
-                techList.innerText = ""
+                const techList = article.querySelector("ul.techList");
                 proj.technos.forEach((tech) => {
-                    const newTech = document.createElement("li");
-                    newTech.innerText = tech;
-                    techList.appendChild(newTech);
+                    techList.innerHTML += `<li class="techlist__tech">${tech}</li>`
                 })
             })
         }
 
         //ajout des projets
         ajouterProjet(
-            "/components/img/bookiCouverture.gif", "capture d'écran du projet Booki",
-            "Booki",
-            "Restranscription d'une maquette en un site responsive",
-            [
-                "HTML",
-                "CSS"
-            ],
-            "/projects/CSS_HTML/Booki"
-        );
-        ajouterProjet(
-            "/components/img/ratingWidget.gif", "capture d'écran du projet Rating Widget",
-            "Rating Widget",
-            "Widget de notation avec notes et moyenne générées aléatoirement",
+            "/components/img/guessMyNumber.gif", "gif du projet Guess my number",
+            "Guess my number",
+            "Petit jeu de \"guess my number\" interractif",
             [
                 "HTML",
                 "CSS",
-                "Javascript"
+                "Javascript",
+                "Documentation & DRY"
             ],
-            "/projects/Javascript/advancedRatingWidget"
+            "/projects/Javascript/guessMyNumber/index.html",
+            "https://github.com/Quentin7381/portfolio/tree/main/projects/Javascript/guessMyNumber"
         );
         ajouterProjet(
             "/components/img/searchAlgorythm.gif", "capture d'écran du projet Rating Widget",
@@ -96,19 +88,31 @@
                 "CSS",
                 "Javascript"
             ],
-            "/projects/Javascript/30DaysChallenge/06 - Type Ahead/secondTry.html"
+            "/projects/Javascript/30DaysChallenge/06 - Type Ahead/secondTry.html",
+            "https://github.com/Quentin7381/portfolio/tree/main/projects/Javascript/30DaysChallenge/06%20-%20Type%20Ahead"
         );
-
         ajouterProjet(
-            "/components/img/guessMyNumber.gif", "gif du projet Guess my number",
-            "Guess my number",
-            "Petit jeu de \"guess my number\" interractif",
+            "/components/img/bookiCouverture.gif", "capture d'écran du projet Booki",
+            "Booki",
+            "Restranscription d'une maquette en un site responsive",
+            [
+                "HTML",
+                "CSS"
+            ],
+            "/projects/CSS_HTML/Booki",
+            "https://github.com/Quentin7381/portfolio/tree/main/projects/CSS_HTML/Booki"
+        );
+        ajouterProjet(
+            "/components/img/ratingWidget.gif", "capture d'écran du projet Rating Widget",
+            "Rating Widget",
+            "Widget de notation avec notes et moyenne générées aléatoirement",
             [
                 "HTML",
                 "CSS",
                 "Javascript"
             ],
-            "/projects/Javascript/guessMyNumber/index.html"
+            "/projects/Javascript/advancedRatingWidget",
+            "https://github.com/Quentin7381/portfolio/tree/main/projects/Javascript/advancedRatingWidget"
         );
 
 
