@@ -124,19 +124,13 @@ header{
     left : var(--margin); right : var(--margin); top: var(--margin); bottom: var(--margin);
 
     box-sizing: content-box;
-    /*
+
     border: solid 5px var(--colorAccent);
-    */
+
     border-radius: 9999px;
     margin: auto;
     display: flex;
     flex-grow: 1;
-
-    fill : red;
-    stroke : red;
-    stroke-width: 5px;
-    stroke-dasharray: 450;
-    stroke-dashoffset: 300;
 }
 
 .progressCircle__outer{
