@@ -22,3 +22,7 @@ btnsShowModal.forEach((elt) => {
 [btnCloseModal, overlay].forEach((elt) => {
     elt.addEventListener('click', closeModal);
 });
+
+window.addEventListener('keydown', (e) => {
+    if(e.key==='Escape') closeModal();
+})
