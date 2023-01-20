@@ -139,3 +139,5 @@ output.push(
     'reinforcedIronPlate', 'ironPlate', 6,
     'reinforcedIronPlate', 'screws', 16
 )
+
+const view1 = new Table("")
