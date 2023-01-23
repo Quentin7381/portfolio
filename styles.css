@@ -4,6 +4,7 @@
     --colorAccent: #e05f00;
     --colorLight: #F8F8FF;
     --colorDark: #363740;
+    --spacingVerySmall: 1vw;
     --spacingSmall: 2vw;
     --spacingMedium: 5vw;
 }
@@ -170,7 +171,6 @@ header>img {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacingSmall);
-    margin: var(--spacingSmall);
 }
 
 .projetsArticle {
@@ -181,7 +181,7 @@ header>img {
     flex-wrap: wrap;
 
     max-width: 550px;
-    padding: 15px;
+    padding: var(--spacingVerySmall);
     margin: auto;
     box-shadow: 5px 4px 15px -2px var(--colorDark);
     position: relative;
@@ -190,17 +190,18 @@ header>img {
 }
 
 .projetsArticle>img {
-    margin: 0 -15px;
-    width: calc(100% + (2*var(--spacingSmall)));
+    margin: 0 calc(var(--spacingVerySmall) * -1);
+    width: calc(100% + (2*var(--spacingVerySmall)));
     height: 300px;
     object-fit: cover;
+    overflow: hidden;
     border-bottom: 2px solid var(--colorDark);
 }
 
 .projetsArticle>.lien {
-    width: calc(100% + (2*var(--spacingSmall)));
-    margin: 0 calc(var(--spacingSmall) * -1);
-    padding: var(--spacingSmall);
+    width: calc(100% + (2*var(--spacingVerySmall)));
+    margin: 0 calc(var(--spacingVerySmall) * -1);
+    padding: var(--spacingVerySmall);
     cursor: pointer;
 }
 
@@ -219,16 +220,17 @@ header>img {
 }
 
 .projetsArticle>.lienCode {
-    margin-bottom: calc(var(--spacingSmall) * -1);
+    margin-bottom: calc(var(--spacingVerySmall) * -1);
     background-color: var(--colorDark);
 }
 
 .projetsArticle>h2 {
-    width: calc(100% + (2*var(--spacingSmall)));
+    width: calc(100% + (2*var(--spacingVerySmall)));
     background-color: var(--colorAccent);
     color: var(--colorLight);
-    margin: -15px -15px 0 -15px;
-    padding: 15px;
+    margin: calc(var(--spacingVerySmall) * -1);
+    margin-bottom: 0;
+    padding: var(--spacingVerySmall);
 }
 
 .projetsArticle>p,
