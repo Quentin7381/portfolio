@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    padding : 0;
+}
+
+:root{
+    --squareSize: clamp(50px, 10vw, 10vh);
+}
+
+img{
+    margin : auto;
+    height: calc(var(--squareSize) - clamp(10px, 2vw, 2vh));
+    width: calc(var(--squareSize) - clamp(10px, 2vw, 2vh));
+    object-fit: fill;
+}
+
+.board{
+    margin : auto;
+    width : calc(8*var(--squareSize));
+    display: grid;
+    grid-template-rows: repeat(8, var(--squareSize));
+    border : 1px solid black;
+}
+
+.row{
+    display: grid;
+    grid-template-rows: var(--squareSize);
+    grid-template-columns: repeat(8, var(--squareSize));
+}
+
+.square{
+    display: flex;
+    border : 1px solid black;
+}
+
+.square.white{
+    background-color: white;
+}
+
+.square.black{
+    background-color: burlywood;
+}
+
+.graveyard{
+    display : flex;
+    flex-wrap: wrap;
+    height: 10vh;
+    width : 100%;   
+}
