@@ -48,3 +48,15 @@ img{
     height: 10vh;
     width : 100%;   
 }
+
+.highlight__moove{
+    background-color: lightblue !important;
+}
+
+.highlight__attack{
+    background-color: lightcoral !important;
+}
+
+.highlight__check{
+    background-color:yellow !important;
+}
