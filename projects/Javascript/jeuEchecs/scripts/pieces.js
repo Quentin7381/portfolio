@@ -342,10 +342,9 @@ export class King extends Piece {
 		super.checkMooves(verbose);
 
 		const list = [
-			[-2, -1], [-2, 1],
-			[2, -1], [2, 1],
-			[-1, -2], [1, -2],
-			[-1, 2], [1, 2]
+			[-1, -1], [-1, 0], [-1, 1], 
+			[0, -1], [0, 1],
+			[1, -1], [1, 0], [1, 1]
 		];
 		
         this.checkList(list);

@@ -1,9 +1,9 @@
 import * as pieces from "./pieces.js";
 import * as board from "./board.js";
 
-  ////////////////////////////////////////////////////////
- //                     INIT                           //
-////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////
+ //                  INIT                         //
+///////////////////////////////////////////////////
 
 //const player1 = new board.Player('white'),
 //    player2 = new board.Player('black');
@@ -11,7 +11,7 @@ import * as board from "./board.js";
 //player2.init();
 
 const piece = [
-  new pieces.Knight('white', 0, 0),
+  new pieces.King('white', 4, 3),
   new pieces.Pawn('white', 5, 2),
   new pieces.Pawn('black', 3, 2)
 ];
