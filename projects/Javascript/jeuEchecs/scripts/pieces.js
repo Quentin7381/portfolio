@@ -64,12 +64,11 @@ class Piece {
 	showMooves(verbose = VERBOSE) {
 		if (verbose) console.groupCollapsed("Piece.showMooves()");
 		this.mooves.forEach((elt) => {
-            if(elt.piece!=null){
-                elt.highlight("attack");
-            } else {
-                elt.highlight("moove");
-            }
-			
+			if (elt.piece != null) {
+				elt.highlight("attack");
+			} else {
+				elt.highlight("moove");
+			}
 		});
 		if (verbose) console.groupEnd("Piece.showMooves()");
 	}
@@ -82,7 +81,7 @@ class Piece {
 		if (verbose) console.groupCollapsed("Piece.showMooves()");
 		this.mooves.forEach((elt) => {
 			elt.highlightRemove("moove");
-            elt.highlightRemove("attack");
+			elt.highlightRemove("attack");
 		});
 		if (verbose) console.groupEnd("Piece.showMooves()");
 	}
@@ -102,42 +101,43 @@ class Piece {
 
 	checkLine(directionX, directionY, verbose = VERBOSE) {
 		if (verbose)
-			console.groupCollapsed("Piece.checkLine(" + directionX + ", " + directionY + ")");
+			console.groupCollapsed(
+				"Piece.checkLine(" + directionX + ", " + directionY + ")"
+			);
 
 		let x = this.x + directionX,
 			y = this.y + directionY,
-            test = true;
+			test = true;
 
-        //first definition of square
-        try{
-            let square = board.squares[x][y];
-            if(square.piece!=null) {
-                test = false;
-            }
+		//first definition of square
+		try {
+			let square = board.squares[x][y];
+			if (square.piece != null) {
+				test = false;
+			}
 
-            while (test) {
-                console.groupCollapsed('x : ' + x + ' | y : ' + y);
-                this.mooves.push(square);
-                (x += directionX), (y += directionY);
-                console.groupEnd('x : ' + x + ' | y : ' + y);
-    
-                square = board.squares[x][y];
-                if(square.piece!=null) {
-                    test = false;
-                }
-            }
+			while (test) {
+				console.groupCollapsed("x : " + x + " | y : " + y);
+				this.mooves.push(square);
+				(x += directionX), (y += directionY);
+				console.groupEnd("x : " + x + " | y : " + y);
 
-            if(square.piece.team!=this.team){
-                this.mooves.push(square);
-            }
+				square = board.squares[x][y];
+				if (square.piece != null) {
+					test = false;
+				}
+			}
 
-        } catch (e) {
-            if(e instanceof TypeError){
-                test = false;
-            } else {
-                console.error(e);
-            }
-        }
+			if (square.piece.team != this.team) {
+				this.mooves.push(square);
+			}
+		} catch (e) {
+			if (e instanceof TypeError) {
+				test = false;
+			} else {
+				console.error(e);
+			}
+		}
 
 		if (verbose) console.log(this.mooves);
 		if (verbose) console.groupEnd("Piece.checkLine(" + x + ", " + y + ")");
@@ -163,13 +163,42 @@ export class Pawn extends Piece {
 	checkMooves(verbose = VERBOSE) {
 		if (verbose) console.groupCollapsed("Pawn.checkMooves()");
 		super.checkMooves(verbose);
-		this.mooves.push(
-			board.squares[this.x][this.y + (this.team == "white" ? -1 : 1)]
-		);
-		if (this.y == (this.team == "white" ? 6 : 1))
-			this.mooves.push(
-				board.squares[this.x][this.y + (this.team == "white" ? -2 : 2)]
-			);
+
+		//moove
+		let square = null;
+		let direction = this.team == "white" ? -1 : 1;
+		if (this.y != (this.team == "white" ? 0 : 7)) {
+            //check first square
+			square = board.squares[this.x][this.y + direction];
+			if (square.piece == null) {
+				this.mooves.push(square);
+                //check second square if didn't moove
+				if (this.y == 6) {
+					square = board.squares[this.x][this.y + direction * 2];
+					if (square.piece == null) {
+						this.mooves.push(square);
+					}
+				}
+			}
+            //check left for attack
+            if(this.x != 0){
+                square = board.squares[this.x-1][this.y + direction];
+                if(square.piece!=null){
+                    if(square.piece.team!=this.team){
+                        this.mooves.push(square);
+                    }
+                }
+            }
+            //check right for attack
+            if(this.x != 7){
+                square = board.squares[this.x+1][this.y + direction];
+                if(square.piece!=null){
+                    if(square.piece.team!=this.team){
+                        this.mooves.push(square);
+                    }
+                }
+            }
+		}
 		if (verbose) console.log(this.mooves);
 		if (verbose) console.groupEnd("Pawn.checkMooves()");
 	}
@@ -187,15 +216,20 @@ export class Bishop extends Piece {
 		super(team, x, y, verbose);
 	}
 
-    checkMooves(verbose = VERBOSE) {
+	checkMooves(verbose = VERBOSE) {
 		if (verbose) console.groupCollapsed("Rook.checkMooves()");
 		super.checkMooves(verbose);
 
-        const lines = [[1, 1], [-1, 1], [1, -1], [-1, -1]];
-        lines.forEach(line => {
-            this.checkLine(...line, verbose);
-        })
-        
+		const lines = [
+			[1, 1],
+			[-1, 1],
+			[1, -1],
+			[-1, -1],
+		];
+		lines.forEach((line) => {
+			this.checkLine(...line, verbose);
+		});
+
 		if (verbose) console.log(this.mooves);
 		if (verbose) console.groupEnd("Rook.checkMooves()");
 	}
@@ -230,11 +264,16 @@ export class Rook extends Piece {
 		if (verbose) console.groupCollapsed("Rook.checkMooves()");
 		super.checkMooves(verbose);
 
-        const lines = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-        lines.forEach(line => {
-            this.checkLine(...line, verbose);
-        })
-        
+		const lines = [
+			[1, 0],
+			[-1, 0],
+			[0, 1],
+			[0, -1],
+		];
+		lines.forEach((line) => {
+			this.checkLine(...line, verbose);
+		});
+
 		if (verbose) console.log(this.mooves);
 		if (verbose) console.groupEnd("Rook.checkMooves()");
 	}
@@ -265,15 +304,24 @@ export class Queen extends Piece {
 		super(team, x, y, verbose);
 	}
 
-    checkMooves(verbose = VERBOSE) {
+	checkMooves(verbose = VERBOSE) {
 		if (verbose) console.groupCollapsed("Rook.checkMooves()");
 		super.checkMooves(verbose);
-        
-        const lines = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]];
-        lines.forEach(line => {
-            this.checkLine(...line, verbose);
-        })
-        
+
+		const lines = [
+			[1, 0],
+			[-1, 0],
+			[0, 1],
+			[0, -1],
+			[1, 1],
+			[-1, 1],
+			[1, -1],
+			[-1, -1],
+		];
+		lines.forEach((line) => {
+			this.checkLine(...line, verbose);
+		});
+
 		if (verbose) console.log(this.mooves);
 		if (verbose) console.groupEnd("Rook.checkMooves()");
 	}
