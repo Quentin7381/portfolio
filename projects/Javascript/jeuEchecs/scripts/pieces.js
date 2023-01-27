@@ -99,6 +99,12 @@ class Piece {
 		if (verbose) console.groupEnd("Piece.checkMooves()");
 	}
 
+    /**
+     * checks a whole line for moovement
+     * @param {Number} directionX the X direction, can be -1, 0 or 1
+     * @param {Number} directionY the Y direction, can ve -1, 0 or 1
+     * @param {Boolean} verbose wether the function will console log or not. Default can be accessed from the const VERBOSE at begining of file
+     */
 	checkLine(directionX, directionY, verbose = VERBOSE) {
 		if (verbose)
 			console.groupCollapsed(
@@ -140,8 +146,31 @@ class Piece {
 		}
 
 		if (verbose) console.log(this.mooves);
-		if (verbose) console.groupEnd("Piece.checkLine(" + x + ", " + y + ")");
+		if (verbose) console.groupEnd("Piece.checkLine(" + directionX + ", " + directionY + ")");
 	}
+
+    checkList(list, verbose = VERBOSE){
+        if (verbose) console.groupCollapsed("Piece.checkList()");
+
+        list.forEach(elt=> {
+            if(
+                this.x+elt[0]>=0 &
+                this.x+elt[0]<=7 &
+                this.y+elt[1]>=0 &
+                this.y+elt[1]<=7
+            ) {
+                let square = board.squares[this.x+elt[0]][this.y+elt[1]];
+                if(square.piece == null){
+                    this.mooves.push(square);
+                } else {
+                    if(square.piece.team!=this.team) this.mooves.push(square);
+                }
+            }
+        })
+
+        if (verbose) console.log(this.mooves);
+		if (verbose) console.groupEnd("Piece.checkList()");
+    }
 
 	select() {}
 
@@ -246,6 +275,23 @@ export class Knight extends Piece {
 	constructor(team, x, y, verbose = VERBOSE) {
 		super(team, x, y, verbose);
 	}
+
+    checkMooves(verbose = VERBOSE) {
+		if (verbose) console.groupCollapsed("Rook.checkMooves()");
+		super.checkMooves(verbose);
+
+		const list = [
+			[-2, -1], [-2, 1],
+			[2, -1], [2, 1],
+			[-1, -2], [1, -2],
+			[-1, 2], [1, 2]
+		];
+		
+        this.checkList(list);
+
+		if (verbose) console.log(this.mooves);
+		if (verbose) console.groupEnd("Rook.checkMooves()");
+	}
 }
 
 export class Rook extends Piece {
@@ -289,6 +335,23 @@ export class King extends Piece {
 	 */
 	constructor(team, x, y, verbose = VERBOSE) {
 		super(team, x, y, verbose);
+	}
+
+    checkMooves(verbose = VERBOSE) {
+		if (verbose) console.groupCollapsed("Rook.checkMooves()");
+		super.checkMooves(verbose);
+
+		const list = [
+			[-2, -1], [-2, 1],
+			[2, -1], [2, 1],
+			[-1, -2], [1, -2],
+			[-1, 2], [1, 2]
+		];
+		
+        this.checkList(list);
+
+		if (verbose) console.log(this.mooves);
+		if (verbose) console.groupEnd("Rook.checkMooves()");
 	}
 }
 
