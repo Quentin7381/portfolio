@@ -46,6 +46,11 @@ export class Player{
 }
 
 class Board{
+    /**
+     * 
+     * @param {*} div the parent div of the board
+     * @param {*} verbose 
+     */
     constructor(div, verbose = VERBOSE){
         this.div = div;
 

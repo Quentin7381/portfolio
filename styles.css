@@ -112,7 +112,6 @@ header>img {
 
 /* ***** ***** INDEX ***** *****/
 .indexMain__techList {
-    border: solid 1px black;
     --size: 150px;
     display: flex;
     flex-wrap: wrap;
@@ -169,7 +168,7 @@ header>img {
 /* ***** ***** PROJETS ***** ***** */
 .projets__liste {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--spacingSmall);
 }
 
