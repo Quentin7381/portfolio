@@ -169,6 +169,7 @@ function checkInput() {
     //If score null player loses
     if (score === 0) {
       playerDefeat();
+    } else {
       //Else give a hint depending on score
       displayOnMessage(
         `${guessInput.value} is too ${
@@ -176,12 +177,12 @@ function checkInput() {
         }...'`
       );
       displayOnSecretNumber(`${guessInput.value > secretNumber ? '↓' : '↑'}`);
+    }
+      
       //Reset input to avoid double entry
       resetInput();
     }
   }
-}
-
 /**
  * Change display to show victory
  */
