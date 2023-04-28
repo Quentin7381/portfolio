@@ -1,0 +1,3 @@
+[submodule "enMatiereDe"]
+	path = projects/enMatiereDe
+	url = git@github.com:Quentin7381/enMatiereDe.git

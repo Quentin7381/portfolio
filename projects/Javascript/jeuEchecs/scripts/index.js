@@ -1,4 +1,4 @@
-import * as pieces from "./pieces.js";
+/*import * as pieces from "./pieces.js";
 import * as board from "./board.js";
 
   ///////////////////////////////////////////////////
@@ -18,4 +18,6 @@ const piece = [
 
 piece[0].checkMooves();
 piece[0].showMooves();
+*/
 
+import { Board } from "./newBoard.js";
