@@ -1,0 +1,212 @@
+/* 
+    <<<<< <<<<< <<<<< ------ >>>>> >>>>> >>>>> 
+    <<<<< <<<<< <<<<< HEADER >>>>> >>>>> >>>>> 
+    <<<<< <<<<< <<<<< ------ >>>>> >>>>> >>>>> 
+*/
+header {
+    z-index: 10;
+    background-color: var(--colorAccent);
+    color: var(--colorLighter);
+    display: flex;
+    height: 70px;
+    box-shadow: var(--shadowLight);
+    position: fixed;
+    top: 0;
+
+    left: 20vw;
+    width: 60vw;
+
+    border-radius: 0 0 7px 7px;
+
+    transition: all 500ms;
+
+    & .ico_menu {
+        opacity: 1;
+        fill: white;
+        height: var(--headerHeight);
+        width: var(--headerHeight);
+        padding: 20px;
+        flex-shrink: 0;
+        cursor: pointer;
+        background-color: var(--colorAccent);
+    
+        transition-property: background-color, border-radius, fill, opactiy, padding, width;
+        transition-duration: 500ms;
+    
+        transition: transform 75ms,
+            box-shadow 75ms,
+            background-color 500ms,
+            border-radius 500ms,
+            fill 500ms,
+            padding 500ms,
+            width 500ms;
+    
+    }
+    
+    & .ico_menu:hover {
+        transform: scale(1.15);
+        box-shadow: var(--shadowMedium);
+    }
+    
+    &>a {
+        border-radius: 0 0 7px 7px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        height: var(--headerHeight);
+        padding: 0 1vw;
+    
+        background-color: var(--colorAccent);
+        color: var(--colorLighter);
+        font-size: 20px;
+        white-space: nowrap;
+    
+        transition: opacity 500ms, background-color 500ms;
+        transition: transform 75ms, box-shadow 75ms, border-radius 75ms;
+
+        &:hover{
+            transform: scale(1.10);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+    }
+}
+
+.logo {
+    margin-left: auto !important;
+    border-radius: 0 0 7px 0;
+    position: fixed;
+    right: 20vw;
+    z-index: 20;
+    width: var(--headerHeight);
+    height: var(--headerHeight);
+    object-fit: contain;
+    background-color: white;
+    transition: all 500ms, transform 75ms, box-shadow 75ms;
+    display: flex;
+    cursor: pointer;
+
+    &>img {
+        object-fit: contain;
+        height: 70px;
+        width: 70px;
+        margin-left: auto;
+    }
+    
+    &:hover {
+        transform: scale(1.10);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+}
+
+
+
+/* <<<<< Header collapse >>>>> */
+header.collapsed {
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    left: 1vw;
+    top: 1vw;
+    right: unset;
+    background-color: #ffffff00;
+    border-radius: 35px;
+
+    & .ico_menu {
+        fill: var(--colorDark);
+        background-color: var(--colorLighterTransparent);
+        border-radius: 35px;
+    }
+    
+    & a {
+        overflow: hidden;
+        padding: 0;
+        background-color: #ffffff00;
+        opacity: 0;
+    }
+    
+    &+#logo {
+        position: fixed;
+        background-color: white;
+        top: 0;
+        right: 0;
+        border-radius: 0 0 0 90px;
+        object-fit: contain;
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (min-width: 701px){
+    header .ico_menu.hidden {
+        width: 0;
+        padding: 0;
+        fill: var(--colorAccent);
+    }
+}
+
+/* 
+    <<<<< <<<<< <<<<< ----- >>>>> >>>>> >>>>> 
+    <<<<< <<<<< <<<<< PHONE >>>>> >>>>> >>>>> 
+    <<<<< <<<<< <<<<< ----- >>>>> >>>>> >>>>> 
+*/
+@media (max-width: 780px){
+    header{
+        left: 0;
+        flex-direction: column;
+        height: 100vh;
+        width: unset;
+        min-width: 300px;
+        border-radius: 0;
+
+        & a{
+            padding: 0 30px;
+            border-radius: 0;
+            text-decoration: underline;
+            &:hover{
+                border-radius: 0 7px 7px 0;
+            }
+        }
+
+        & .ico_menu{
+            border-radius: 7px;
+            margin: 0 auto 0 0;
+            height: 55px;
+            width: 55px;
+        }
+
+        &.collapsed{
+            height: 55px;
+            width: 55px;
+            min-width: 55px;
+            overflow: unset;
+
+            +#logo{
+                width: 70px;
+                height: 70px;
+            }
+        }
+    }
+
+    #logo{
+        position: fixed;
+        background-color: white;
+        top: 0;
+        right: 0;
+        border-radius: 0 0 0 90px;
+        object-fit: contain;
+        width: 70px;
+        height: 70px;
+
+        & img{
+            width: 55px;
+            height: 55px;
+        }
+    }
+}
+
+@media (max-width: 300px){
+    header{
+        min-width: 100%;
+        overflow: scroll;
+    }
+}
